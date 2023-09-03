@@ -20,3 +20,23 @@ uninstall: ## Uninstall hooks
 
 validate: ## Validate files with pre-commit hooks
 	@pre-commit run --all-files
+
+upgrade-crossplane: ## Upgrade Crossplane
+	# @helm dependency build ./config/helm/crossplane/
+	@helm upgrade --install -n crossplane-system \
+		crossplane ./config/helm/crossplane/ \
+		--dependency-update \
+		--cleanup-on-fail \
+		--create-namespace \
+		--atomic \
+		--values ./config/helm/crossplane/values.yaml
+
+diff-crossplane: ## Diff Crossplane
+	# @helm dependency build ./config/helm/crossplane/
+	@helm diff upgrade -n crossplane-system \
+		crossplane ./config/helm/crossplane/ \
+		--values ./config/helm/crossplane/values.yaml
+
+template-crossplane: ## Template Crossplane
+	@helm template crossplane config/helm/crossplane/ --output-dir ./result  \
+		--values ./config/helm/crossplane/values.yaml

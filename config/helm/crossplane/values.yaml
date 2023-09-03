@@ -1,0 +1,30 @@
+---
+provider:
+  enabled: enabled
+  aws:
+    # renovate: datasource=github-releases depName=crossplane-contrib/provider-aws
+    version: v0.43.0
+
+crossplane:
+  enabled: true
+  leaderElection: false
+  imagePullSecrets:
+    - dockerhub-auth
+
+  args:
+  - --debug
+
+  metrics:
+    enabled: true
+
+  securityContextCrossplane:
+    runAsUser: 65532
+    runAsGroup: 65532
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+
+  # -- Custom labels to add into metadata
+  customLabels:
+    reason: crossplane-workshop
+    component: crossplane
+

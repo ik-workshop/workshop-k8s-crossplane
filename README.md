@@ -58,15 +58,58 @@ $ kind create cluster --config=config/kind/main.yaml
 $ kind get clusters
 > k8s-kind-local
 $ kubectl cluster-info --context kind-local
+$ kubectl config set-context kind-local --namespace default
 $ k get pods -A
 ```
-
 
 Tear down cluster
 
 ```bash
 $ kind delete cluster -n kind-local
 ```
+
+### Install Crossplane
+
+- Install [Crossplane](https://docs.crossplane.io/latest/software/install/)
+
+```sh
+$ helm repo add crossplane-stable https://charts.crossplane.io/stable
+$ helm repo update
+$ make upgrade-crossplane
+$ kubectl config set-context kind-local --namespace crossplane-system
+```
+
+Current crossplane configuration can be found here
+
+[crossplane helm chart](config/helm/crossplane)
+
+#### Uninstall Crossplane
+
+- Uninstall [Crossplane](https://docs.crossplane.io/v1.13/software/uninstall/) resources.
+
+1. Remove all composite resource definitions
+1. Remove all remaining managed resources
+1. Remove all providers
+
+```sh
+$ kubectl get xrd
+> compositepostgresqlinstances.database.example.org
+$ kubectl delete xrd compositepostgresqlinstances.database.example.org
+$ kubectl get managed
+> bucket.s3.aws.upbound.io/crossplane-bucket-867737b10
+$ kubectl delete bucket.s3.aws.upbound.io/crossplane-bucket-867737b10
+$ kubectl get providers
+> upbound-provider-aws
+$ kubectl delete provider upbound-provider-aws
+$ helm uninstall crossplane --namespace crossplane-system
+$ kubectl get pods -n crossplane-system
+```
+### Install Crossplane AWS Provider (or any other)
+
+### Build provider locally
+
+- [Docs](https://github.com/crossplane-contrib/provider-aws/blob/master/INSTALL.md)
+- [Push to Docker](https://hub.docker.com/repositories/cloudkats)
 
 ## Resources
 
@@ -76,6 +119,8 @@ $ kind delete cluster -n kind-local
 #### Crossplane
 
 - [Crossplane](https://docs.crossplane.io/)
+
+- [Upbound: migration](https://docs.upbound.io/providers/migration/#migrating-from-community-to-official-providers)
 
 #### Kind
 

@@ -54,3 +54,10 @@ Temporary Items
 !.vscode/*.code-snippets
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,homebrew
+
+result
+*/requirements.lock
+*/Chart.lock
+*/charts
+**.tgz
+**.lock
