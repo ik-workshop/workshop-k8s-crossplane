@@ -122,6 +122,8 @@ $ kubectl get pods -n crossplane-system
 
 - [Upbound: migration](https://docs.upbound.io/providers/migration/#migrating-from-community-to-official-providers)
 - [Provider AWS: quick start](https://marketplace.upbound.io/providers/upbound/provider-aws/v0.40.0/docs/quickstart)
+- [Provider: build a package](https://docs.crossplane.io/latest/concepts/packages/#building-a-package)
+- [Crossplane provider configs](https://github.com/crossplane/crossplane/blob/1aa83092172bdf0d2ed64754d33517c612ff7368/design/one-pager-package-format-v2.md)
 
 #### Kind
 
