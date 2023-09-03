@@ -1,0 +1,28 @@
+# kind create cluster --config=config/kind/main.yaml
+
+# Configuration https://kind.sigs.k8s.io/docs/user/configuration/
+# - Three node (two workers) cluster config
+# - With port mappings for
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: local
+# image: kindest/node:v1.24.0
+# kubernetesVersion: v1.24.0
+nodes:
+- role: control-plane
+  image: kindest/node:v1.24.0
+  # in order to expose the ports it needs, to be able to access it from outside
+  # https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings
+  extraPortMappings:
+  - containerPort: 30080
+    hostPort: 30070
+  - containerPort: 80
+    hostPort: 8081
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 8443
+    protocol: TCP
+- role: worker
+  image: kindest/node:v1.24.0
+  labels:
+    tier: worker
