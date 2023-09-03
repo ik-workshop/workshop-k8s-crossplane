@@ -1,4 +1,4 @@
-# Workshop Blueprint
+# Crossplane with Kind
 
 Not clear how to create crossplane test environment, build and create packages. Let's try to simplify it.
 
@@ -65,7 +65,7 @@ $ k get pods -A
 Tear down cluster
 
 ```bash
-$ kind delete cluster -n kind-local
+$ kind delete cluster -n local
 ```
 
 ### Install Crossplane
