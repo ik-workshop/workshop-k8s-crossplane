@@ -3,10 +3,10 @@ _extends: .github
 
 repository:
   # See https://developer.github.com/v3/repos/#edit for all available settings.
-  name: workshop-blueprint
-  description: ':factory: Workshop blueprint'
+  name: workshop-k8s-crossplane
+  description: ':factory: Workshop crossplane test environment'
   homepage: https://ivankatliarchuk.github.io
-  topics: ivka, workshop, blueprint
+  topics: ivka, workshop, k8s, crossplane
   private: false
   has_issues: true
   has_projects: false
